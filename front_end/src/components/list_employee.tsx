@@ -3,6 +3,7 @@ import {
     Box,
     Button,
     Flex,
+    Input,
     Table,
     Tbody,
     Td,
@@ -10,7 +11,7 @@ import {
     Thead,
     Tr
 } from '@chakra-ui/react';
-import { useState } from 'react';
+import React, { useState } from 'react';
 
 interface Employee {
     name: string;
@@ -19,219 +20,188 @@ interface Employee {
     actions: string;
 }
 
-const initialEmployees: Employee[] = [
-    {
-        name: "Andre",
-        department: "Financeiro",
-        job: "Analista",
-        actions: "aql1"
-    },
-    {
-        name: "Maria",
-        department: "TI",
-        job: "Desenvolvedora",
-        actions: "bql"
-    },
-    {
-        name: "Pedro",
-        department: "RH",
-        job: "Recrutador",
-        actions: "cql"
-    },
-    {
-        name: "Andre",
-        department: "Financeiro",
-        job: "Analista",
-        actions: "aql1"
-    },
-    {
-        name: "Maria",
-        department: "TI",
-        job: "Desenvolvedora",
-        actions: "bql"
-    },
-    {
-        name: "Pedro",
-        department: "RH",
-        job: "Recrutador",
-        actions: "cql"
-    }, {
-        name: "Andre",
-        department: "Financeiro",
-        job: "Analista",
-        actions: "aql1"
-    },
-    {
-        name: "Maria",
-        department: "TI",
-        job: "Desenvolvedora",
-        actions: "bql"
-    },
-    {
-        name: "Pedro",
-        department: "RH",
-        job: "Recrutador",
-        actions: "cql"
-    }, {
-        name: "Andre",
-        department: "Financeiro",
-        job: "Analista",
-        actions: "aql1"
-    },
-    {
-        name: "Maria",
-        department: "TI",
-        job: "Desenvolvedora",
-        actions: "bql"
-    },
-    {
-        name: "Pedro",
-        department: "RH",
-        job: "Recrutador",
-        actions: "cql"
-    }, {
-        name: "Andre",
-        department: "Financeiro",
-        job: "Analista",
-        actions: "aql1"
-    },
-    {
-        name: "Maria",
-        department: "TI",
-        job: "Desenvolvedora",
-        actions: "bql"
-    },
-    {
-        name: "Pedro",
-        department: "RH",
-        job: "Recrutador",
-        actions: "cql"
-    }, {
-        name: "Andre",
-        department: "Financeiro",
-        job: "Analista",
-        actions: "aql1"
-    },
-    {
-        name: "Maria",
-        department: "TI",
-        job: "Desenvolvedora",
-        actions: "bql"
-    },
-    {
-        name: "Pedro",
-        department: "RH",
-        job: "Recrutador",
-        actions: "cql"
-    }, {
-        name: "Andre",
-        department: "Financeiro",
-        job: "Analista",
-        actions: "aql1"
-    },
-    {
-        name: "Maria",
-        department: "TI",
-        job: "Desenvolvedora",
-        actions: "bql"
-    },
-    {
-        name: "Pedro",
-        department: "RH",
-        job: "Recrutador",
-        actions: "cql"
-    }, {
-        name: "Andre",
-        department: "Financeiro",
-        job: "Analista",
-        actions: "aql1"
-    },
-    {
-        name: "Maria",
-        department: "TI",
-        job: "Desenvolvedora",
-        actions: "bql"
-    },
-    {
-        name: "Pedro",
-        department: "RH",
-        job: "Recrutador",
-        actions: "cql"
-    }, {
-        name: "Andre",
-        department: "Financeiro",
-        job: "Analista",
-        actions: "aql1"
-    },
-    {
-        name: "Maria",
-        department: "TI",
-        job: "Desenvolvedora",
-        actions: "bql"
-    },
-    {
-        name: "Pedro",
-        department: "RH",
-        job: "Recrutador",
-        actions: "cql"
-    }, {
-        name: "Andre",
-        department: "Financeiro",
-        job: "Analista",
-        actions: "aql1"
-    },
-    {
-        name: "Maria",
-        department: "TI",
-        job: "Desenvolvedora",
-        actions: "bql"
-    },
-    {
-        name: "Pedro",
-        department: "RH",
-        job: "Recrutador",
-        actions: "cql"
-    }, {
-        name: "Andre",
-        department: "Financeiro",
-        job: "Analista",
-        actions: "aql1"
-    },
-    {
-        name: "Maria",
-        department: "TI",
-        job: "Desenvolvedora",
-        actions: "bql"
-    },
-    {
-        name: "Pedro",
-        department: "RH",
-        job: "Recrutador",
-        actions: "cql"
-    }, {
-        name: "Andre",
-        department: "Financeiro",
-        job: "Analista",
-        actions: "aql1"
-    },
-    {
-        name: "Maria",
-        department: "TI",
-        job: "Desenvolvedora",
-        actions: "bql"
-    },
-    {
-        name: "Pedro",
-        department: "RH",
-        job: "Recrutador",
-        actions: "cql"
-    },
-];
-const itemsPerPage = 10;
 export function ListEmployee() {
+    const initialEmployees: Employee[] = [
+        {
+            name: "Andre",
+            department: "Financeiro",
+            job: "Analista",
+            actions: "aql1"
+        },
+        {
+            name: "Maria",
+            department: "Financeiro",
+            job: "Analista",
+            actions: "aql1"
+        },
+
+        {
+            name: "Emerson",
+            department: "Financeiro",
+            job: "Analista",
+            actions: "aql1"
+        },
+        {
+            name: "Andre",
+            department: "Financeiro",
+            job: "Analista",
+            actions: "aql1"
+        },
+        {
+            name: "Maria",
+            department: "Financeiro",
+            job: "Analista",
+            actions: "aql1"
+        },
+
+        {
+            name: "Emerson",
+            department: "Financeiro",
+            job: "Analista",
+            actions: "aql1"
+        }, {
+            name: "Andre",
+            department: "Financeiro",
+            job: "Analista",
+            actions: "aql1"
+        },
+        {
+            name: "Maria",
+            department: "Financeiro",
+            job: "Analista",
+            actions: "aql1"
+        },
+
+        {
+            name: "Emerson",
+            department: "Financeiro",
+            job: "Analista",
+            actions: "aql1"
+        }, {
+            name: "Andre",
+            department: "Financeiro",
+            job: "Analista",
+            actions: "aql1"
+        },
+        {
+            name: "Maria",
+            department: "Financeiro",
+            job: "Analista",
+            actions: "aql1"
+        },
+
+        {
+            name: "Emerson",
+            department: "Financeiro",
+            job: "Analista",
+            actions: "aql1"
+        }, {
+            name: "Andre",
+            department: "Financeiro",
+            job: "Analista",
+            actions: "aql1"
+        },
+        {
+            name: "Maria",
+            department: "Financeiro",
+            job: "Analista",
+            actions: "aql1"
+        },
+
+        {
+            name: "Emerson",
+            department: "Financeiro",
+            job: "Analista",
+            actions: "aql1"
+        }, {
+            name: "Andre",
+            department: "Financeiro",
+            job: "Analista",
+            actions: "aql1"
+        },
+        {
+            name: "Maria",
+            department: "Financeiro",
+            job: "Analista",
+            actions: "aql1"
+        },
+
+        {
+            name: "Emerson",
+            department: "Financeiro",
+            job: "Analista",
+            actions: "aql1"
+        }, {
+            name: "Andre",
+            department: "Financeiro",
+            job: "Analista",
+            actions: "aql1"
+        },
+        {
+            name: "Maria",
+            department: "Financeiro",
+            job: "Analista",
+            actions: "aql1"
+        },
+
+        {
+            name: "Emerson",
+            department: "Do bar",
+            job: "Analista",
+            actions: "aql1"
+        }, {
+            name: "Andre",
+            department: "Raparigueiro",
+            job: "Analista",
+            actions: "aql1"
+        },
+        {
+            name: "Maria",
+            department: "Financeiro",
+            job: "Analista",
+            actions: "aql1"
+        },
+
+        {
+            name: "Emerson",
+            department: "Raparigueiro",
+            job: "Analista",
+            actions: "aql1"
+        },
+
+        {
+            name: "Lg",
+            department: "Finge de inocente",
+            job: "Analista",
+            actions: "aql1"
+        },
+
+        {
+            name: "Lg",
+            department: "Impressionado",
+            job: "Analista",
+            actions: "aql1"
+        },
+    ];
+
     const [employees, setEmployees] = useState<Employee[]>(initialEmployees);
     const [currentPage, setCurrentPage] = useState(1);
     const [sortConfig, setSortConfig] = useState<{ key: keyof Employee, direction: 'ascending' | 'descending' } | null>(null);
+    const [searchTerm, setSearchTerm] = useState('');
+    const itemsPerPage = 10;
+
+    const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        setSearchTerm(event.target.value);
+
+        const filteredResults = initialEmployees.filter(employee =>
+            employee.name.toLowerCase().includes(event.target.value.toLowerCase()) ||
+            employee.department.toLowerCase().includes(event.target.value.toLowerCase()) ||
+            employee.job.toLowerCase().includes(event.target.value.toLowerCase()) ||
+            employee.actions.toLowerCase().includes(event.target.value.toLowerCase())
+        );
+        setEmployees(filteredResults);
+        setCurrentPage(1); // Reset page to 1 when performing a new search
+    };
 
     const handleSort = (key: keyof Employee) => {
         let direction: 'ascending' | 'descending' = 'ascending';
@@ -284,8 +254,17 @@ export function ListEmployee() {
     const indexOfFirstItem = indexOfLastItem - itemsPerPage;
     const currentItems = employees.slice(indexOfFirstItem, indexOfLastItem);
 
+
     return (
         <Box overflowX="auto">
+            <Box mb="4">
+                <Input
+                    placeholder="Pesquisar"
+                    value={searchTerm}
+                    onChange={handleSearchChange}
+                    mb="4"
+                />
+            </Box>
             <Flex justifyContent="flex-end" mt="4">
                 <Button onClick={handleFirstPage} disabled={currentPage === 1} mr="2">Primeira</Button>
                 <Button onClick={handlePrevPage} disabled={currentPage === 1} mr="2">Anterior</Button>
