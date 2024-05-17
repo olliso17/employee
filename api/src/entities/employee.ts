@@ -1,4 +1,5 @@
 import EmployeeInterface from "./employee.interface.js";
+import { regex } from '../../utils/regex.js';
 
 const uuid = require("uuid");
 
@@ -6,9 +7,9 @@ type EmployeeProps = {
     name: string,
     email: string,
     created_at: Date,
-    job_position:string,
-    departament:string,
-    actions:string,
+    job_position: string,
+    departament: string,
+    actions: string,
     updated_at: Date,
     active: boolean
 }
@@ -17,9 +18,9 @@ export class Employee implements EmployeeInterface {
     private _id: string;
     private _name: string;
     private _email: string;
-    private _job_position:string;
-    private _departament:string;
-    private _actions:string;
+    private _job_position: string;
+    private _departament: string;
+    private _actions: string;
     private _created_at: Date;
     private _updated_at: Date;
     private _active: boolean;
@@ -28,8 +29,8 @@ export class Employee implements EmployeeInterface {
         this._id = uuid.v4().toString();
         this._name = props.name;
         this._email = props.email;
-        this._job_position=props.job_position;
-        this._departament=props.departament;
+        this._job_position = props.job_position;
+        this._departament = props.departament;
         this._actions = props.actions;
         this._created_at = props.created_at;
         this._updated_at = props.updated_at;
@@ -62,4 +63,5 @@ export class Employee implements EmployeeInterface {
     get active(): boolean {
         return this._active
     }
+
 }
