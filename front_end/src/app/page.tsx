@@ -1,12 +1,13 @@
-import { Box, Heading, Stack } from "@chakra-ui/react";
+import { Box, Button, Flex, Heading, Stack } from "@chakra-ui/react";
 import { ListEmployee } from "../components/list_employee";
 
 export default function Home() {
   return (
     <Stack align="center" mt={8}>
       <Box
-        width="90%"
-        maxW="1200px"
+        width="98%"
+        margin="2px"
+        // maxW="1200px"
         borderWidth="1px"
         borderRadius="lg"
         overflow="hidden"
