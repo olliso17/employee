@@ -6,12 +6,12 @@ const uuid = require("uuid");
 type EmployeeProps = {
     name: string,
     email: string,
-    created_at: Date,
     job_position: string,
     departament: string,
     actions: string,
     updated_at: Date,
-    active: boolean
+    active: boolean,
+    created_at: Date
 }
 
 export class Employee implements EmployeeInterface {

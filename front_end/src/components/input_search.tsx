@@ -17,12 +17,13 @@ export function InputSearch({ setEmployees, setCurrentPage, initialEmployees, ha
         setSearchTerm(event.target.value);
 
         const filteredResults = initialEmployees.filter(employee =>
-            employee.name.toLowerCase().includes(event.target.value.toLowerCase()) ||
-            employee.email.toLowerCase().includes(event.target.value.toLowerCase()) ||
-            employee.department.toLowerCase().includes(event.target.value.toLowerCase()) ||
-            employee.job_position.toLowerCase().includes(event.target.value.toLowerCase()) ||
-            employee.actions.toLowerCase().includes(event.target.value.toLowerCase())
+            (employee.name?.toLowerCase().includes(event.target.value.toLowerCase()) || '') ||
+            (employee.email?.toLowerCase().includes(event.target.value.toLowerCase()) || '') ||
+            (employee.department?.toLowerCase().includes(event.target.value.toLowerCase()) || '') ||
+            (employee.job_position?.toLowerCase().includes(event.target.value.toLowerCase()) || '') ||
+            (employee.actions?.toLowerCase().includes(event.target.value.toLowerCase()) || '')
         );
+
         setEmployees(filteredResults);
         setCurrentPage(1); // Reset page to 1 when performing a new search
     };

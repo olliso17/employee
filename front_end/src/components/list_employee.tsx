@@ -9,182 +9,41 @@ import {
     Tbody,
     Td,
     Thead,
-    Tr
+    Tr,
+    VStack
 } from '@chakra-ui/react';
 import React, { useEffect, useState } from 'react';
 import { ColumnList } from './column_list';
 import { InputSearch } from './input_search';
 import { Paginate } from './paginate';
 import { fetchEmployees } from '../router/router';
+import { Link } from '@chakra-ui/next-js';
 
 export interface Employee {
     name: string;
     department: string;
-    email: string,
+    email: string;
     job_position: string;
     actions: string;
 }
 
 export function ListEmployee() {
-    const initialEmployees: Employee[] = [
-        {
-            name: "Andre",
-            department: "Financeiro",
-            email: "email@emotionReact_isolatedHnrs.com",
-            job_position: "Analista",
-            actions: "aql1"
-        },
-        {
-            name: "Maria",
-            department: "Financeiro",
-            email: "email@emotionReact_isolatedHnrs.com",
-            job_position: "Analista",
-            actions: "aql1"
-        },
-
-        {
-            name: "Emerson",
-            department: "Financeiro",
-            email: "email@emotionReact_isolatedHnrs.com",
-            job_position: "Analista",
-            actions: "aql1"
-        },
-        {
-            name: "Andre",
-            department: "Financeiro",
-            email: "email@emotionReact_isolatedHnrs.com",
-            job_position: "Analista",
-            actions: "aql1"
-        },
-        {
-            name: "Maria",
-            department: "Financeiro",
-            email: "email@emotionReact_isolatedHnrs.com",
-            job_position: "Analista",
-            actions: "aql1"
-        },
-
-        {
-            name: "Emerson",
-            department: "Financeiro",
-            email: "email@emotionReact_isolatedHnrs.com",
-            job_position: "Analista",
-            actions: "aql1"
-        }, {
-            name: "Andre",
-            department: "Financeiro",
-            email: "email@emotionReact_isolatedHnrs.com",
-            job_position: "Analista",
-            actions: "aql1"
-        },
-        {
-            name: "Maria",
-            department: "Financeiro",
-            email: "email@emotionReact_isolatedHnrs.com",
-            job_position: "Analista",
-            actions: "aql1"
-        },
-
-        {
-            name: "Emerson",
-            department: "Financeiro",
-            email: "email@emotionReact_isolatedHnrs.com",
-            job_position: "Analista",
-            actions: "aql1"
-        }, {
-            name: "Andre",
-            department: "Financeiro",
-            email: "email@emotionReact_isolatedHnrs.com",
-            job_position: "Analista",
-            actions: "aql1"
-        },
-        {
-            name: "Maria",
-            department: "Financeiro",
-            email: "email@emotionReact_isolatedHnrs.com",
-            job_position: "Analista",
-            actions: "aql1"
-        },
-
-        {
-            name: "Emerson",
-            department: "Financeiro",
-            email: "email@emotionReact_isolatedHnrs.com",
-            job_position: "Analista",
-            actions: "aql1"
-        }, {
-            name: "Andre",
-            department: "Financeiro",
-            email: "email@emotionReact_isolatedHnrs.com",
-            job_position: "Analista",
-            actions: "aql1"
-        },
-        {
-            name: "Maria",
-            department: "Financeiro",
-            email: "email@emotionReact_isolatedHnrs.com",
-            job_position: "Analista",
-            actions: "aql1"
-        },
-
-        {
-            name: "Emerson",
-            department: "Financeiro",
-            email: "email@emotionReact_isolatedHnrs.com",
-            job_position: "Analista",
-            actions: "aql1"
-        }, {
-            name: "Andre",
-            department: "Financeiro",
-            email: "email@emotionReact_isolatedHnrs.com",
-            job_position: "Analista",
-            actions: "aql1"
-        },
-        {
-            name: "Maria",
-            department: "Financeiro",
-            email: "email@emotionReact_isolatedHnrs.com",
-            job_position: "Analista",
-            actions: "aql1"
-        },
-
-        {
-            name: "Emerson",
-            department: "Financeiro",
-            email: "email@emotionReact_isolatedHnrs.com",
-            job_position: "Analista",
-            actions: "aql1"
-        }, {
-            name: "Andre",
-            department: "Financeiro",
-            email: "email@emotionReact_isolatedHnrs.com",
-            job_position: "Analista",
-            actions: "aql1"
-        },
-        {
-            name: "Maria",
-            department: "Financeiro",
-            email: "email@emotionReact_isolatedHnrs.com",
-            job_position: "Analista",
-            actions: "aql1"
-        },
-
-    ];
-
-    const [employees, setEmployees] = useState<Employee[]>(initialEmployees);
+    const [employees, setEmployees] = useState<Employee[]>([]);
     const [sortConfig, setSortConfig] = useState<{ key: keyof Employee, direction: 'ascending' | 'descending' } | null>(null);
     const [currentPage, setCurrentPage] = useState(1);
     const itemsPerPage = 10;
     const indexOfLastItem = currentPage * itemsPerPage;
     const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+
+    useEffect(() => {
+        async function fetchData() {
+            const data = await fetchEmployees();
+            setEmployees(data);
+        }
+        fetchData();
+    }, []);
+
     const currentItems = employees.slice(indexOfFirstItem, indexOfLastItem);
-    // useEffect(() => {
-    //     async function fetchData() {
-    //         const data = await fetchEmployees();
-    //         setEmployees(data);
-    //     }
-    //     fetchData();
-    // }, []);
 
     const handleSort = (key: keyof Employee) => {
         let direction: 'ascending' | 'descending' = 'ascending';
@@ -196,8 +55,9 @@ export function ListEmployee() {
             const aValue = a[key];
             const bValue = b[key];
 
-            const aString = typeof aValue === 'string' ? aValue.toLowerCase() : '';
-            const bString = typeof bValue === 'string' ? bValue.toLowerCase() : '';
+            // Convert values to strings if they are defined, otherwise use empty strings
+            const aString = aValue != null ? aValue.toString().toLowerCase() : '';
+            const bString = bValue != null ? bValue.toString().toLowerCase() : '';
 
             if (direction === 'ascending') {
                 return aString.localeCompare(bString);
@@ -210,19 +70,24 @@ export function ListEmployee() {
         setSortConfig({ key, direction });
     };
 
-    
-
-
     return (
         <Box overflowX="auto">
             <InputSearch
                 setCurrentPage={setCurrentPage}
                 setEmployees={setEmployees}
-                initialEmployees={initialEmployees}
-                handleSort={handleSort} // Passando handleSort para InputSearch
-                children={<Button colorScheme="blue" marginLeft={["0", "2"]} marginTop={["2", "0"]}>Adicionar</Button>}
+                initialEmployees={employees}
+                handleSort={handleSort}
+                children={
+                    <VStack spacing={4} align="flex-start">
+                        <Link href="/add-employee">
+                            <Button colorScheme="blue" marginLeft={["0", "2"]} marginTop={["2", "0"]}>
+                                Adicionar
+                            </Button>
+                        </Link>
+                    </VStack>
+                }
             />
-            <Paginate employees={employees} setCurrentPage={setCurrentPage} currentPage={currentPage} itemsPerPage={itemsPerPage}/>
+            <Paginate employees={employees} setCurrentPage={setCurrentPage} currentPage={currentPage} itemsPerPage={itemsPerPage} />
 
             <div className="table-wrapper">
                 <Table variant='striped' colorScheme='gray'>
@@ -250,6 +115,6 @@ export function ListEmployee() {
                     </Tbody>
                 </Table>
             </div>
-        </Box >
-    )
+        </Box>
+    );
 }
