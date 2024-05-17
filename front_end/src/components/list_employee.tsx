@@ -11,9 +11,11 @@ import {
     Thead,
     Tr
 } from '@chakra-ui/react';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { ColumnList } from './column_list';
 import { InputSearch } from './input_search';
+import { Paginate } from './paginate';
+import { fetchEmployees } from '../router/router';
 
 export interface Employee {
     name: string;
@@ -170,12 +172,19 @@ export function ListEmployee() {
     ];
 
     const [employees, setEmployees] = useState<Employee[]>(initialEmployees);
-    const [currentPage, setCurrentPage] = useState(1);
     const [sortConfig, setSortConfig] = useState<{ key: keyof Employee, direction: 'ascending' | 'descending' } | null>(null);
-
+    const [currentPage, setCurrentPage] = useState(1);
     const itemsPerPage = 10;
-
-  
+    const indexOfLastItem = currentPage * itemsPerPage;
+    const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+    const currentItems = employees.slice(indexOfFirstItem, indexOfLastItem);
+    // useEffect(() => {
+    //     async function fetchData() {
+    //         const data = await fetchEmployees();
+    //         setEmployees(data);
+    //     }
+    //     fetchData();
+    // }, []);
 
     const handleSort = (key: keyof Employee) => {
         let direction: 'ascending' | 'descending' = 'ascending';
@@ -201,32 +210,7 @@ export function ListEmployee() {
         setSortConfig({ key, direction });
     };
 
-    const totalItems = employees.length;
-    const totalPages = Math.ceil(totalItems / itemsPerPage);
-
-    const handlePageChange = (page: number) => {
-        setCurrentPage(page);
-    };
-
-    const handleFirstPage = () => {
-        setCurrentPage(1);
-    };
-
-    const handlePrevPage = () => {
-        setCurrentPage((prevPage) => Math.max(prevPage - 1, 1));
-    };
-
-    const handleNextPage = () => {
-        setCurrentPage((prevPage) => Math.min(prevPage + 1, totalPages));
-    };
-
-    const handleLastPage = () => {
-        setCurrentPage(totalPages);
-    };
-
-    const indexOfLastItem = currentPage * itemsPerPage;
-    const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-    const currentItems = employees.slice(indexOfFirstItem, indexOfLastItem);
+    
 
 
     return (
@@ -238,24 +222,7 @@ export function ListEmployee() {
                 handleSort={handleSort} // Passando handleSort para InputSearch
                 children={<Button colorScheme="blue" marginLeft={["0", "2"]} marginTop={["2", "0"]}>Adicionar</Button>}
             />
-            <Flex justifyContent={["center", "flex-end"]} mt="4">
-                <Button onClick={handleFirstPage} disabled={currentPage === 1} mr={["2", "0"]} mb={["2", "0"]} marginLeft={["0", "2"]}><ArrowLeftIcon /></Button>
-                <Button onClick={handlePrevPage} disabled={currentPage === 1} mr={["2", "0"]} mb={["2", "0"]} marginLeft={["0", "2"]}><ChevronLeftIcon /></Button>
-                {Array.from({ length: totalPages }).map((_, index) => (
-                    <Button
-                        key={index}
-                        onClick={() => handlePageChange(index + 1)}
-                        colorScheme={currentPage === index + 1 ? "blue" : "gray"}
-                        mr={["2", "0"]}
-                        mb={["2", "0"]}
-                        marginLeft={["0", "2"]}
-                    >
-                        {index + 1}
-                    </Button>
-                ))}
-                <Button onClick={handleNextPage} disabled={currentPage === totalPages} mr={["2", "0"]} mb={["2", "0"]} marginLeft={["0", "2"]}><ChevronRightIcon /></Button>
-                <Button onClick={handleLastPage} disabled={currentPage === totalPages} mb={["2", "0"]} marginLeft={["0", "2"]}><ArrowRightIcon /></Button>
-            </Flex>
+            <Paginate employees={employees} setCurrentPage={setCurrentPage} currentPage={currentPage} itemsPerPage={itemsPerPage}/>
 
             <div className="table-wrapper">
                 <Table variant='striped' colorScheme='gray'>
