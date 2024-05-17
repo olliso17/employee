@@ -13,6 +13,7 @@ import {
 } from '@chakra-ui/react';
 import React, { useState } from 'react';
 import { ColumnList } from './column_list';
+import { InputSearch } from './input_search';
 
 export interface Employee {
     name: string;
@@ -171,22 +172,10 @@ export function ListEmployee() {
     const [employees, setEmployees] = useState<Employee[]>(initialEmployees);
     const [currentPage, setCurrentPage] = useState(1);
     const [sortConfig, setSortConfig] = useState<{ key: keyof Employee, direction: 'ascending' | 'descending' } | null>(null);
-    const [searchTerm, setSearchTerm] = useState('');
+
     const itemsPerPage = 10;
 
-    const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        setSearchTerm(event.target.value);
-
-        const filteredResults = initialEmployees.filter(employee =>
-            employee.name.toLowerCase().includes(event.target.value.toLowerCase()) ||
-            employee.email.toLowerCase().includes(event.target.value.toLowerCase()) ||
-            employee.department.toLowerCase().includes(event.target.value.toLowerCase()) ||
-            employee.job_position.toLowerCase().includes(event.target.value.toLowerCase()) ||
-            employee.actions.toLowerCase().includes(event.target.value.toLowerCase())
-        );
-        setEmployees(filteredResults);
-        setCurrentPage(1); // Reset page to 1 when performing a new search
-    };
+  
 
     const handleSort = (key: keyof Employee) => {
         let direction: 'ascending' | 'descending' = 'ascending';
@@ -242,19 +231,13 @@ export function ListEmployee() {
 
     return (
         <Box overflowX="auto">
-            <Box mb="4">
-                <Flex justifyContent="space-between" flexWrap="wrap" alignItems="center">
-                    <Input
-                        placeholder="Pesquisar"
-                        value={searchTerm}
-                        onChange={handleSearchChange}
-                        maxWidth={["100%", "70%", "50%"]}
-                        marginBottom={["2", "0", "0"]}
-                    />
-
-                    <Button colorScheme="blue" marginLeft={["0", "2"]} marginTop={["2", "0"]}>Adicionar</Button> { }
-                </Flex>
-            </Box>
+            <InputSearch
+                setCurrentPage={setCurrentPage}
+                setEmployees={setEmployees}
+                initialEmployees={initialEmployees}
+                handleSort={handleSort} // Passando handleSort para InputSearch
+                children={<Button colorScheme="blue" marginLeft={["0", "2"]} marginTop={["2", "0"]}>Adicionar</Button>}
+            />
             <Flex justifyContent={["center", "flex-end"]} mt="4">
                 <Button onClick={handleFirstPage} disabled={currentPage === 1} mr={["2", "0"]} mb={["2", "0"]} marginLeft={["0", "2"]}><ArrowLeftIcon /></Button>
                 <Button onClick={handlePrevPage} disabled={currentPage === 1} mr={["2", "0"]} mb={["2", "0"]} marginLeft={["0", "2"]}><ChevronLeftIcon /></Button>

@@ -15,7 +15,7 @@ export default function Home() {
         p={6}
       >
         <Heading as="h1" size="lg" mb={4} textAlign="center">
-          Tabela de Funcionários
+          Lista de Funcionários
         </Heading>
         <ListEmployee />
       </Box>
