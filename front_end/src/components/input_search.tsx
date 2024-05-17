@@ -6,11 +6,11 @@ type Props = {
     setEmployees: React.Dispatch<React.SetStateAction<Employee[]>>
     setCurrentPage: React.Dispatch<React.SetStateAction<number>>
     initialEmployees: Employee[]
-    handleSort: (key: keyof Employee) => void; // Adicionado handleSort
-    children: JSX.Element
+    handleSort: (key: keyof Employee) => void; 
+   
 }
 
-export function InputSearch({ setEmployees, setCurrentPage, initialEmployees, handleSort, children }: Props) {
+export function InputSearch({ setEmployees, setCurrentPage, initialEmployees, handleSort}: Props) {
     const [searchTerm, setSearchTerm] = useState('');
 
     const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -19,26 +19,26 @@ export function InputSearch({ setEmployees, setCurrentPage, initialEmployees, ha
         const filteredResults = initialEmployees.filter(employee =>
             (employee.name?.toLowerCase().includes(event.target.value.toLowerCase()) || '') ||
             (employee.email?.toLowerCase().includes(event.target.value.toLowerCase()) || '') ||
-            (employee.department?.toLowerCase().includes(event.target.value.toLowerCase()) || '') ||
+            (employee.departament?.toLowerCase().includes(event.target.value.toLowerCase()) || '') ||
             (employee.job_position?.toLowerCase().includes(event.target.value.toLowerCase()) || '') ||
             (employee.actions?.toLowerCase().includes(event.target.value.toLowerCase()) || '')
         );
 
         setEmployees(filteredResults);
-        setCurrentPage(1); // Reset page to 1 when performing a new search
+        setCurrentPage(1); 
     };
 
     return (
-        <Box mb="4">
+        <Box mb="4" >
             <Flex justifyContent="space-between" flexWrap="wrap" alignItems="center">
                 <Input
                     placeholder="Pesquisar"
                     value={searchTerm}
                     onChange={handleSearchChange}
+                    min-width="350px"
                     maxWidth={["100%", "70%", "50%"]}
                     marginBottom={["2", "0", "0"]}
                 />
-                {children}
             </Flex>
         </Box>
     )

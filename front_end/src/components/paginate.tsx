@@ -1,6 +1,7 @@
 import { ArrowLeftIcon, ArrowRightIcon, ChevronLeftIcon, ChevronRightIcon } from '@chakra-ui/icons';
 import { Button, Flex } from "@chakra-ui/react";
 import { Employee } from "./list_employee";
+import { FiChevronsLeft, FiChevronsRight } from "react-icons/fi";
 
 type Props = {
     employees: Employee[]
@@ -35,8 +36,10 @@ export function Paginate({ employees, setCurrentPage, currentPage, itemsPerPage 
     };
 
     return (
-        <Flex justifyContent={["center", "flex-end"]} mt="4">
-            <Button onClick={handleFirstPage} disabled={currentPage === 1} mr={["2", "0"]} mb={["2", "0"]} marginLeft={["0", "2"]}><ArrowLeftIcon /></Button>
+        <Flex justifyContent={["center", "flex-end"]} m="8">
+            <Button onClick={handleFirstPage} disabled={currentPage === 1} mr={["2", "0"]} mb={["2", "0"]} marginLeft={["0", "2"]}>
+                <FiChevronsLeft />
+            </Button>
             <Button onClick={handlePrevPage} disabled={currentPage === 1} mr={["2", "0"]} mb={["2", "0"]} marginLeft={["0", "2"]}><ChevronLeftIcon /></Button>
             {Array.from({ length: totalPages }).map((_, index) => (
                 <Button
@@ -51,7 +54,7 @@ export function Paginate({ employees, setCurrentPage, currentPage, itemsPerPage 
                 </Button>
             ))}
             <Button onClick={handleNextPage} disabled={currentPage === totalPages} mr={["2", "0"]} mb={["2", "0"]} marginLeft={["0", "2"]}><ChevronRightIcon /></Button>
-            <Button onClick={handleLastPage} disabled={currentPage === totalPages} mb={["2", "0"]} marginLeft={["0", "2"]}><ArrowRightIcon /></Button>
+            <Button onClick={handleLastPage} disabled={currentPage === totalPages} mb={["2", "0"]} marginLeft={["0", "2"]}><FiChevronsRight /></Button>
         </Flex>
     )
 }

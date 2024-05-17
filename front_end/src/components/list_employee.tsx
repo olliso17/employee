@@ -1,5 +1,5 @@
 'use client'
-import { ArrowLeftIcon, ArrowRightIcon, ChevronLeftIcon, ChevronRightIcon } from '@chakra-ui/icons';
+import { EditIcon, SmallCloseIcon} from '@chakra-ui/icons';
 import {
     Box,
     Button,
@@ -21,7 +21,7 @@ import { Link } from '@chakra-ui/next-js';
 
 export interface Employee {
     name: string;
-    department: string;
+    departament: string;
     email: string;
     job_position: string;
     actions: string;
@@ -55,7 +55,6 @@ export function ListEmployee() {
             const aValue = a[key];
             const bValue = b[key];
 
-            // Convert values to strings if they are defined, otherwise use empty strings
             const aString = aValue != null ? aValue.toString().toLowerCase() : '';
             const bString = bValue != null ? bValue.toString().toLowerCase() : '';
 
@@ -72,22 +71,25 @@ export function ListEmployee() {
 
     return (
         <Box overflowX="auto">
-            <InputSearch
-                setCurrentPage={setCurrentPage}
-                setEmployees={setEmployees}
-                initialEmployees={employees}
-                handleSort={handleSort}
-                children={
-                    <VStack spacing={4} align="flex-start">
+            <Flex justifyContent="space-betwen">
+                <InputSearch
+                    setCurrentPage={setCurrentPage}
+                    setEmployees={setEmployees}
+                    initialEmployees={employees}
+                    handleSort={handleSort}
+                />
+            
+                <VStack spacing={4} align="flex-start">
                         <Link href="/add-employee">
                             <Button colorScheme="blue" marginLeft={["0", "2"]} marginTop={["2", "0"]}>
                                 Adicionar
                             </Button>
                         </Link>
                     </VStack>
-                }
-            />
+
+            </Flex>
             <Paginate employees={employees} setCurrentPage={setCurrentPage} currentPage={currentPage} itemsPerPage={itemsPerPage} />
+           
 
             <div className="table-wrapper">
                 <Table variant='striped' colorScheme='gray'>
@@ -95,9 +97,10 @@ export function ListEmployee() {
                         <Tr>
                             <ColumnList name="Funcionarios" handleSort={() => handleSort('name')} />
                             <ColumnList name="Email" handleSort={() => handleSort('email')} />
-                            <ColumnList name="Departamentos" handleSort={() => handleSort('department')} />
+                            <ColumnList name="Departamentos" handleSort={() => handleSort('departament')} />
                             <ColumnList name="Cargos" handleSort={() => handleSort('job_position')} />
                             <ColumnList name="Ações" handleSort={() => handleSort('actions')} />
+                            <ColumnList name="Opções" handleSort={() => {}} />
                         </Tr>
                     </Thead>
                     <Tbody>
@@ -105,11 +108,28 @@ export function ListEmployee() {
                             <Tr key={index}>
                                 <Td>{employee.name}</Td>
                                 <Td>{employee.email}</Td>
-                                <Td>{employee.department}</Td>
+                                <Td>{employee.departament}</Td>
                                 <Td>{employee.job_position}</Td>
                                 <Td>{employee.actions}</Td>
-                                <Td><Button colorScheme="blue">Editar</Button></Td>
-                                <Td><Button colorScheme="blue">Deletar</Button></Td>
+                                <Td> 
+                                    <Flex>
+                                        <VStack spacing={4} align="flex-start">
+                                            <Link href="/edit-employee">
+                                                <Button colorScheme="yellow" marginLeft={["0", "2"]} marginTop={["2", "0"]} title='Editar'>
+                                                <EditIcon/>
+                                                </Button>
+                                            </Link>
+                                        </VStack>
+                                        <VStack spacing={4} align="flex-start">
+                                            <Link href="/delete-employee">
+                                                <Button colorScheme="red" marginLeft={["0", "2"]} marginTop={["2", "0"]} title='Deletar'>
+                                                <SmallCloseIcon/>
+                                                </Button>
+                                            </Link>
+                                        </VStack>
+                                    </Flex>
+                                </Td>
+                                
                             </Tr>
                         ))}
                     </Tbody>

@@ -1,5 +1,5 @@
 'use client'
-import React from "react";
+import React, { useState } from "react";
 import {
     FormControl,
     FormLabel,
@@ -9,13 +9,14 @@ import {
     Text,
 } from "@chakra-ui/react";
 import { useForm } from "react-hook-form";
-import axios from "axios";
+import { addEmployee } from "../router/router";
+import { SetAlert } from './alert';
 
 type FormData = {
     name: string;
     email: string;
     job_position: string;
-    department: string;
+    departament: string;
     actions: string;
 };
 
@@ -23,18 +24,24 @@ type FormData = {
 
 export function AddEmployee() {
     const { register, handleSubmit, formState: { errors }, reset } = useForm<FormData>();
+    const [alertStatus, setAlertStatus] = useState<"success" | "error" | null>(null);
+    const [alertMessage, setAlertMessage] = useState<string>("");
 
-    const onSubmit = async (data: FormData) => {
+    const onSubmit = async (dataBody: FormData) => {
         try {
-            await axios.post("/api/save-data", data); // Assuming the endpoint to save data is "/api/save-data"
-            reset(); // Reset the form after successful submission
-            console.log("Data saved successfully:", data);
+            const data = await addEmployee(dataBody) 
+            reset(); 
+            setAlertStatus("success");
+            setAlertMessage("Funcionário salvo com Sucesso");
         } catch (error) {
-            console.error("Error saving data:", error);
+            setAlertStatus("error");
+            setAlertMessage("Failed to save data");
         }
     };
     return (
         <VStack spacing={4} align="center">
+            <SetAlert alertMessage={alertMessage} alertStatus = {alertStatus} setAlertStatus={setAlertStatus}/>
+
             <form onSubmit={handleSubmit(onSubmit)}>
                 <FormControl isInvalid={!!errors.name}>
                     <FormLabel htmlFor="name">Name</FormLabel>
@@ -51,10 +58,10 @@ export function AddEmployee() {
                     <Input id="job_position" type="text" {...register("job_position", { required: true, validate: value => value.trim() !== '' })} />
                     {errors.job_position && <Text color="red.500">Job Position is required</Text>}
                 </FormControl>
-                <FormControl isInvalid={!!errors.department}>
-                    <FormLabel htmlFor="department">Department</FormLabel>
-                    <Input id="department" type="text" {...register("department", { required: true, validate: value => value.trim() !== '' })} />
-                    {errors.department && <Text color="red.500">Department is required</Text>}
+                <FormControl isInvalid={!!errors.departament}>
+                    <FormLabel htmlFor="departament">Departament</FormLabel>
+                    <Input id="departament" type="text" {...register("departament", { required: true, validate: value => value.trim() !== '' })} />
+                    {errors.departament && <Text color="red.500">Departament is required</Text>}
                 </FormControl>
                 <FormControl isInvalid={!!errors.actions}>
                     <FormLabel htmlFor="actions">Actions</FormLabel>
