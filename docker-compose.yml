@@ -1,8 +1,8 @@
 version: '3'
 services:
-  src:
+  api:
     build:
-      context: ./src
+      context: ./api
       dockerfile: DockerFile
     command: npm i
     ports:
@@ -34,3 +34,12 @@ services:
     environment:
       MONGO_INITDB_ROOT_USERNAME: root
       MONGO_INITDB_ROOT_PASSWORD: Employee
+  front_end:
+    build:
+      context: ./front_end
+      dockerfile: DockerFile
+    command: npm i
+    ports:
+      - 3000:3000
+    depends_on:
+      - db
