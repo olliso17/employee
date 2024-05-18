@@ -6,3 +6,4 @@ export class DeleteEmployeeUsecase {
         return this.employeeRepository.deleteEmployee(id);
     }
 }
+//# sourceMappingURL=deleteEmployee.usecase.js.map

@@ -1,6 +1,8 @@
 {
   "compilerOptions": {
-    "module": "commonjs",
+    "module": "CommonJS",
+    // "module": "NodeNext",
+    // "moduleResolution": "NodeNext",
     "declaration": true,
     "removeComments": true,
     "emitDecoratorMetadata": true,
@@ -18,7 +20,9 @@
     "noFallthroughCasesInSwitch": false,
     "baseUrl": "./",
     "paths": {
-      "src/*": ["./src/*"]
+      "src/*": [
+        "./src/*"
+      ]
     }
   }
 }

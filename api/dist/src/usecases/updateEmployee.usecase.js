@@ -11,3 +11,4 @@ export class UpdateEmployeeUsecase {
         return this.EmployeeRepository.updateEmployee(id, Employee);
     }
 }
+//# sourceMappingURL=updateEmployee.usecase.js.map

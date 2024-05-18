@@ -1,4 +1,5 @@
 import { stringNotNullAndBlankSpace } from '../../utils/regex.js';
+import { AppError } from "../tratandoErro.js";
 const uuid = require("uuid");
 export class Employee {
     constructor(props) {
@@ -42,20 +43,21 @@ export class Employee {
     }
     validateEmployee() {
         if (stringNotNullAndBlankSpace.test(this.name) === false) {
-            throw new Error("Name is not a valid employee");
+            throw new AppError("Name is not a valid employee", 500);
         }
         if (stringNotNullAndBlankSpace.test(this.email) === false) {
-            throw new Error("Email is not a valid employee");
+            throw new AppError("Email is not a valid employee", 500);
         }
         if (stringNotNullAndBlankSpace.test(this.departament) === false) {
-            throw new Error("Departament is not a valid employee");
+            throw new AppError("Departament is not a valid employee", 500);
         }
         if (stringNotNullAndBlankSpace.test(this.job_position) === false) {
-            throw new Error("Job Position is not a valid employee");
+            throw new AppError("Job Position is not a valid employee", 500);
         }
         if (stringNotNullAndBlankSpace.test(this.actions) === false) {
-            throw new Error("Actions is not a valid employee");
+            throw new AppError("Actions is not a valid employee", 500);
         }
     }
     ;
 }
+//# sourceMappingURL=employee.js.map

@@ -1,23 +1,35 @@
 import { EmployeeModel } from "../models/employee.model.js";
+import { AppError } from "../tratandoErro.js";
 export class EmployeRepository {
     async createEmployee(name, email, job_position, departament, actions) {
-        return await EmployeeModel.create({ name,
-            email,
-            job_position,
-            departament,
-            actions });
+        try {
+            return await EmployeeModel.create({
+                name,
+                email,
+                job_position,
+                departament,
+                actions
+            });
+        }
+        catch (error) {
+            throw new AppError('Não foi possivel criar functionario', 500);
+        }
     }
     async getEmployeeById(id) {
         try {
             return await EmployeeModel.findById(id).exec();
         }
         catch (error) {
-            console.error('Não há empregador:', error);
-            return null;
+            throw new AppError('Não há funcionário:', 500);
         }
     }
     async getAllEmployees() {
-        return await EmployeeModel.find().exec();
+        try {
+            return await EmployeeModel.find().exec();
+        }
+        catch (error) {
+            throw new AppError('Não foi possível pegar todos os funcionários', 500);
+        }
     }
     async updateEmployee(id, EmployeeData) {
         try {
@@ -25,12 +37,17 @@ export class EmployeRepository {
             return updatedEmployee;
         }
         catch (error) {
-            console.error('Erro ao atualizar o empregador:', error);
-            return null;
+            throw new AppError('Erro ao atualizar o funcionário:', 500);
         }
     }
     async deleteEmployee(id) {
-        await EmployeeModel.findByIdAndDelete(id).exec();
+        try {
+            await EmployeeModel.findByIdAndDelete(id).exec();
+        }
+        catch (error) {
+            throw new AppError('Não foi possível deletar o funcionário', 500);
+        }
     }
 }
 export default new EmployeRepository();
+//# sourceMappingURL=employee.repository.js.map

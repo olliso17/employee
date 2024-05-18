@@ -1,0 +1,1 @@
+{"version":3,"file":"getEmployeeById.usecase.js","sourceRoot":"","sources":["../../../src/usecases/getEmployeeById.usecase.ts"],"names":[],"mappings":"AAIA,MAAM,OAAO,sBAAsB;IAC/B,YAAoB,kBAA+C;QAA/C,uBAAkB,GAAlB,kBAAkB,CAA6B;IAAG,CAAC;IACvE,KAAK,CAAC,OAAO,CAAC,EAAS;QACnB,OAAO,IAAI,CAAC,kBAAkB,CAAC,eAAe,CAAC,EAAE,CAAC,CAAC;IACvD,CAAC;CACJ"}

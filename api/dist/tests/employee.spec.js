@@ -1,4 +1,4 @@
-import { Employee } from "../src/entities/employee.js";
+import { Employee } from "../src/entities/employee";
 const employee = new Employee({
     name: "Fábio",
     email: "fabio@gmail.com",
@@ -16,7 +16,7 @@ describe("Employee Unit Test", () => {
                 departament: "TI",
                 actions: "sabe tudo"
             });
-        }).toThrowError("Name cannot be empty");
+        }).toThrowError("Name is not a valid employee");
     });
     it("should throw error name is blank space", () => {
         expect(() => {
@@ -27,7 +27,7 @@ describe("Employee Unit Test", () => {
                 departament: "TI",
                 actions: "sabe tudo"
             });
-        }).toThrowError("Name cannot be empty");
+        }).toThrowError("Name is not a valid employee");
     });
     it("should throw error email is empty", () => {
         expect(() => {
@@ -78,8 +78,8 @@ describe("Employee Unit Test", () => {
             new Employee({
                 name: "Fábio",
                 email: "fabio@gmail.com",
-                job_position: "",
-                departament: "TI",
+                job_position: "desenvolvedor",
+                departament: "",
                 actions: "sabe tudo"
             });
         }).toThrowError("Departament is not a valid employee");
@@ -89,8 +89,8 @@ describe("Employee Unit Test", () => {
             new Employee({
                 name: "Fábio",
                 email: "fabio@gmail.com",
-                job_position: " ",
-                departament: "TI",
+                job_position: "desenvolvedor",
+                departament: "  ",
                 actions: "sabe tudo"
             });
         }).toThrowError("Departament is not a valid employee");
@@ -102,7 +102,7 @@ describe("Employee Unit Test", () => {
                 email: "fabio@gmail.com",
                 job_position: "desenvolvedor",
                 departament: "TI",
-                actions: "sabe tudo"
+                actions: ""
             });
         }).toThrowError("Actions is not a valid employee");
     });
@@ -111,10 +111,11 @@ describe("Employee Unit Test", () => {
             new Employee({
                 name: "Fábio",
                 email: "fabio@gmail.com",
-                job_position: " ",
+                job_position: "desenvolvedor",
                 departament: "TI",
-                actions: "sabe tudo"
+                actions: "  "
             });
         }).toThrowError("Actions is not a valid employee");
     });
 });
+//# sourceMappingURL=employee.spec.js.map

@@ -9,3 +9,4 @@ export const stringSpecialCaracters = /^(?![!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?`~]
 export const atLeastOneUppercaseLetter = /^(?=.*[A-Z]).+$/;
 export const atLeastOneSpecialCharacter = /^(?=.*[!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?`~])/;
 export const atLeastOneNumber = /.*[0-9].*/;
+//# sourceMappingURL=regex.js.map

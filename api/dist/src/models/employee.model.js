@@ -37,3 +37,4 @@ const EmployeeSchema = new Schema({
     timestamps: true
 });
 export const EmployeeModel = mongoose.model('EmployeeModel', EmployeeSchema);
+//# sourceMappingURL=employee.model.js.map

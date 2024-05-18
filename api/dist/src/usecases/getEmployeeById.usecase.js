@@ -6,3 +6,4 @@ export class GetEmployeeByIdUsecase {
         return this.EmployeeRepository.getEmployeeById(id);
     }
 }
+//# sourceMappingURL=getEmployeeById.usecase.js.map

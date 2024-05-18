@@ -20,7 +20,7 @@ export class EmployeeController {
             res.status(201).json(Employee);
         }
         catch (error) {
-            res.status(500).json({ error });
+            res.status(500).json({ error: 'Erro ao criar funcionario' });
         }
     }
     async getAllEmployees(req, res) {
@@ -29,7 +29,7 @@ export class EmployeeController {
             res.json(Employees);
         }
         catch (error) {
-            res.status(500).json({ error: 'Erro ao obter empregadores' });
+            res.status(500).json({ error: 'Erro ao obter todos os funcionarios' });
         }
     }
     async getEmployeeById(req, res) {
@@ -37,12 +37,12 @@ export class EmployeeController {
         try {
             const Employee = await this.getEmployeeByIdUseCase.execute(EmployeeId);
             if (!Employee) {
-                res.status(404).json({ error: 'Empregador não encontrado' });
+                res.status(404).json({ error: 'Funcionário não encontrado' });
             }
             res.json(Employee);
         }
         catch (error) {
-            res.status(500).json({ error: 'Erro ao obter empregador' });
+            res.status(500).json({ error: 'Erro ao obter Funcionário' });
         }
     }
     async updateEmployee(req, res) {
@@ -51,12 +51,12 @@ export class EmployeeController {
         try {
             const Employee = await this.updateEmployeeUseCase.execute(EmployeeId, EmployeeData);
             if (!Employee) {
-                res.status(404).json({ error: 'Empregador não encontrado' });
+                res.status(404).json({ error: 'Funcionário não encontrado' });
             }
             res.json(Employee);
         }
         catch (error) {
-            res.status(500).json({ error: 'Erro ao editar empregador' });
+            res.status(500).json({ error: 'Erro ao editar functionário' });
         }
     }
     async deleteEmployee(req, res) {
@@ -66,7 +66,8 @@ export class EmployeeController {
             res.status(204).send();
         }
         catch (error) {
-            res.status(500).json({ error: 'Erro ao excluir empregador' });
+            res.status(500).json({ error: 'Erro ao excluir funcionário' });
         }
     }
 }
+//# sourceMappingURL=employee.controller.js.map

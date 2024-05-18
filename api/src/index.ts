@@ -3,6 +3,7 @@ import mongoose from 'mongoose';
 import bodyParser from 'body-parser';
 import { EmployeeController } from './controllers/employee.controller.js';
 import cors from 'cors';
+import { errorHandler } from './errorhandler.js';
 
 const app = express();
 app.use(bodyParser.json());
@@ -12,6 +13,8 @@ const corsOptions: cors.CorsOptions = {
   methods: ['GET', 'POST', 'PUT', 'DELETE'], 
   allowedHeaders: ['Content-Type', 'Authorization'], 
 };
+
+app.use(errorHandler);
 
 app.use(cors(corsOptions));
 const PORT = 3000;
