@@ -17,7 +17,7 @@ export async function addEmployee(data:any){
         return response.data;
        
     } catch (error) {
-        console.error("Erro ao salvar o funcionário:", error);
+        return error
     }
 }
 export async function getEmployeeById(employeeId:string){
@@ -26,7 +26,7 @@ export async function getEmployeeById(employeeId:string){
         return response.data;
        
     } catch (error) {
-        console.error("Ação de chhamar o funcionário está dando erro:", error);
+        return error
     }
 }
 export async function editEmployee(employeeId:string, data:any){
@@ -37,7 +37,7 @@ export async function editEmployee(employeeId:string, data:any){
         return response.data;
        
     } catch (error) {
-        console.error("Erro ao editar funcionário:", error);
+        return error;
     }
 }
 export async function deleteEmployee(employeeId:string | undefined){

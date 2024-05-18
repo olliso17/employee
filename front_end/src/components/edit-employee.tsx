@@ -8,6 +8,7 @@ import {
     VStack,
     Text,
     Spinner,
+    Link 
 } from "@chakra-ui/react";
 import { useForm } from "react-hook-form";
 import axios from "axios";
@@ -53,14 +54,17 @@ export function EditEmployee({ employeeId }: EditEmployeeProps) {
     }, [employeeId, setValue]);
 
     const onSubmit = async (dataBody: FormData) => {
-        try {
-            await editEmployee(employeeId, dataBody)
-            setAlertStatus("success");
-            setAlertMessage("Funcionário atualizado com sucesso");
-        } catch (error) {
-            setAlertStatus("error");
-            setAlertMessage("Não foi possível atualizar o funcionário");
-        }
+       
+           const data= await editEmployee(employeeId, dataBody)
+            if(data.message == undefined ){
+                setAlertStatus("success");
+                setAlertMessage("Funcionário editado com Sucesso"); 
+                reset(); 
+                
+            }else{
+                setAlertStatus("error");
+                setAlertMessage("Não foi possível editar funcionário"); 
+            }
     };
 
     if (loading) {
@@ -97,7 +101,11 @@ export function EditEmployee({ employeeId }: EditEmployeeProps) {
                     <Input id="actions" type="text" {...register("actions", { required: true, validate: value => value.trim() !== '' })} />
                     {errors.actions && <Text color="red.500">Actions is required</Text>}
                 </FormControl>
-                <Button type="submit" mt={4} colorScheme="blue">Submit</Button>
+                <VStack spacing={4} align="flex-start">
+                    <Link href="/">
+                        <Button type="submit" mt={4} colorScheme="blue">Submit</Button>
+                    </Link>
+                </VStack>
             </form>
         </VStack>
     );

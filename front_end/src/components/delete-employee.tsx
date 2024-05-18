@@ -11,8 +11,8 @@ export function DeleteEmployee({name, employeeId}:Props) {
   const { isOpen, onToggle, onClose } = useDisclosure()
   const onSubmit = async (employeeId:string | undefined) => {
     try {
-       const data = await deleteEmployee(employeeId);
-       console.log("foi", data)
+      await deleteEmployee(employeeId);
+      location.reload()
     } catch (error) {
         console.log(error)
     }

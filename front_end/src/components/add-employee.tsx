@@ -11,6 +11,7 @@ import {
 import { useForm } from "react-hook-form";
 import { addEmployee } from "../router/router";
 import { SetAlert } from './alert';
+import { AxiosError } from "axios";
 
 type FormData = {
     name: string;
@@ -28,15 +29,21 @@ export function AddEmployee() {
     const [alertMessage, setAlertMessage] = useState<string>("");
 
     const onSubmit = async (dataBody: FormData) => {
-        try {
+      
             const data = await addEmployee(dataBody) 
-            reset(); 
-            setAlertStatus("success");
-            setAlertMessage("Funcionário salvo com Sucesso");
-        } catch (error) {
-            setAlertStatus("error");
-            setAlertMessage("Não foi possível adicionar funcionário");
-        }
+            if(data.message == undefined ){
+                setAlertStatus("success");
+                setAlertMessage("Funcionário salvo com Sucesso"); 
+                reset(); 
+                
+            }else{
+                setAlertStatus("error");
+                setAlertMessage("Não foi possível adicionar funcionário"); 
+            }
+          
+     
+     
+   
     };
     return (
         <VStack spacing={4} align="center">
