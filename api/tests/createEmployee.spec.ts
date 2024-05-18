@@ -1,5 +1,5 @@
-import { CreateEmployeeUsecase } from "../src/application/usecases/createEmployee.usecase";
-import { AppError } from "../src/tratandoErro";
+import { CreateEmployeeUsecase } from "../src/application/usecases/createEmployee.usecase.js";
+import { AppError } from "../src/tratandoErro.js";
 
 
 describe('CreateEmployeeUsecase', () => {

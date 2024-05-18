@@ -1,6 +1,6 @@
 
-import { Employee } from "../../domain/entities/employee";
-import EmployeeRepositoryInterface from "../../infra/repositories/employee.repository.interface";
+import { Employee } from "../../domain/entities/employee.js";
+import EmployeeRepositoryInterface from "../../infra/repositories/employee.repository.interface.js";
 
 
 export class UpdateEmployeeUsecase{

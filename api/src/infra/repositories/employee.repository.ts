@@ -1,7 +1,7 @@
-import { Employee } from "../../domain/entities/employee";
-import { EmployeeModel } from "../models/employee.model";
-import { AppError } from "../../tratandoErro";
-import EmployeeRepositoryInterface from "./employee.repository.interface";
+import { Employee } from "../../domain/entities/employee.js";
+import { EmployeeModel } from "../models/employee.model.js";
+import { AppError } from "../../tratandoErro.js";
+import EmployeeRepositoryInterface from "./employee.repository.interface.js";
 
 
 export class EmployeRepository implements EmployeeRepositoryInterface {

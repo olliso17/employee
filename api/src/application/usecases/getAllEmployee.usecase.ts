@@ -1,7 +1,7 @@
 
-import { Employee } from "../../domain/entities/employee";
-import EmployeeRepositoryInterface from "../../infra/repositories/employee.repository.interface";
-import { AppError } from "../../tratandoErro";
+import { Employee } from "../../domain/entities/employee.js";
+import EmployeeRepositoryInterface from "../../infra/repositories/employee.repository.interface.js";
+import { AppError } from "../../tratandoErro.js";
 
 
 export class GetAllEmployeesUsecase{

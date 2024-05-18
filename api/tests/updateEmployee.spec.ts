@@ -1,4 +1,4 @@
-import { UpdateEmployeeUsecase } from "../src/application/usecases/updateEmployee.usecase";
+import { UpdateEmployeeUsecase } from "../src/application/usecases/updateEmployee.usecase.js";
 
 
 describe('UpdateEmployeeUsecase', () => {

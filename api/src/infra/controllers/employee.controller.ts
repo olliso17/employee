@@ -1,11 +1,11 @@
 
 import { Request, Response } from 'express';
-import { CreateEmployeeUsecase } from '../../application/usecases/createEmployee.usecase';
-import { UpdateEmployeeUsecase } from '../../application/usecases/updateEmployee.usecase';
-import { GetAllEmployeesUsecase } from '../../application/usecases/getAllEmployee.usecase';
-import { GetEmployeeByIdUsecase } from '../../application/usecases/getEmployeeById.usecase';
-import { DeleteEmployeeUsecase } from '../../application/usecases/deleteEmployee.usecase';
-import { EmployeRepository } from '../repositories/employee.repository';
+import { CreateEmployeeUsecase } from '../../application/usecases/createEmployee.usecase.js';
+import { UpdateEmployeeUsecase } from '../../application/usecases/updateEmployee.usecase.js';
+import { GetAllEmployeesUsecase } from '../../application/usecases/getAllEmployee.usecase.js';
+import { GetEmployeeByIdUsecase } from '../../application/usecases/getEmployeeById.usecase.js';
+import { DeleteEmployeeUsecase } from '../../application/usecases/deleteEmployee.usecase.js';
+import { EmployeRepository } from '../repositories/employee.repository.js';
 
 export class EmployeeController {
     private createEmployeeUseCase: CreateEmployeeUsecase;

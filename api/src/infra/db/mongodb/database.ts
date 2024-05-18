@@ -1,9 +1,22 @@
 import mongoose from 'mongoose';
+import dotenv from 'dotenv';
+dotenv.config();
 
 const connectDB = async () => {
     try {
-        await mongoose.connect('mongodb+srv://root:FZn6Dz8WJowdCgvx@cluster0.4jhjoyz.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0');
-        console.log('MongoDB connected successfully');
+        await new Promise(resolve => setTimeout(resolve, 10000));
+        // await mongoose.connect('mongodb://admin:example@mongo:27017/').then(()=>{
+        //      console.log('MongoDB connected successfully');
+        // }).catch((err)=>{
+        //     console.log(err)
+        // });
+
+        await mongoose.connect(process.env.URLMONGO).then(()=>{
+             console.log('MongoDB connected successfully');
+            }).catch((err)=>{
+                console.log(err)
+            });
+       
     } catch (error) {
         console.error('Error connecting to MongoDB', error);
         process.exit(1);

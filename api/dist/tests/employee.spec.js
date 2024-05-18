@@ -1,4 +1,4 @@
-import { Employee } from "../src/entities/employee";
+import { Employee } from "../src/domain/entities/employee.js";
 const employee = new Employee({
     name: "Fábio",
     email: "fabio@gmail.com",

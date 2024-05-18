@@ -1,5 +1,5 @@
 import mongoose, { Model, Schema, model } from 'mongoose';
-import { Employee } from '../../domain/entities/employee';
+import { Employee } from '../../domain/entities/employee.js';
 import { randomUUID } from 'crypto';
 
 

@@ -1,4 +1,4 @@
-import EmployeeRepositoryInterface from "../../infra/repositories/employee.repository.interface";
+import EmployeeRepositoryInterface from "../../infra/repositories/employee.repository.interface.js";
 
 
 export class DeleteEmployeeUsecase{

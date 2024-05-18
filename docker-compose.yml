@@ -1,5 +1,32 @@
 version: '3.1'
 services:
+  mongo:
+    image: mongo:latest
+    container_name: mongo
+    restart: always
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: admin
+      MONGO_INITDB_ROOT_PASSWORD: example
+    ports:
+      - 27017:27017
+    volumes:
+      - mongo/data/db
+
+  mongo-express:
+    image: mongo-express:latest
+    container_name: mongo-express
+    restart: always
+    ports:
+      - 8081:8081
+    environment:
+      ME_CONFIG_MONGODB_ADMINUSERNAME: admin
+      ME_CONFIG_MONGODB_ADMINPASSWORD: example
+      ME_CONFIG_MONGODB_URL: mongodb://admin:example@mongo:27017/
+      ME_CONFIG_MONGODB_ENABLE_ADMIN: "true"
+      ME_CONFIG_BASICAUTH_USERNAME: admin
+      ME_CONFIG_BASICAUTH_PASSWORD: example
+    depends_on:
+      - mongo
   api:
     build:
       context: ./api/src
@@ -7,35 +34,18 @@ services:
     command: npm i
     ports:
       - 8080:8000
+    environment:
+      MONGODB_URI: mongodb://admin:example@mongo:27017
+      Db_NAME: admin
     depends_on:
       - mongo
-  mongo:
-    image: mongo
-    restart: always
-    ports:
-      - 27017:27017
-    volumes:
-    - ./data:/data/mongo
-    environment:
-      MONGO_INITDB_ROOT_USERNAME: employee
-      MONGO_INITDB_ROOT_PASSWORD: example
-  mongo-express:
-    image: mongo-express
-    restart: always
-    ports:
-      - 8081:8081
-    environment:
-      ME_CONFIG_MONGODB_ADMINUSERNAME: employee
-      ME_CONFIG_MONGODB_ADMINPASSWORD: example
-      ME_CONFIG_MONGODB_URL: mongodb://employee:example@mongo:27017/
-      ME_CONFIG_MONGODB_SERVER: mongo
   front_end:
     build:
       context: ./front_end/src
       dockerfile: DockerFile
     command: npm i
     ports:
-      - 3000:3001
+      - 3000:3000
     depends_on:
       - mongo
       - api
