@@ -11,15 +11,42 @@ export async function fetchEmployees() {
 }
 
 export async function addEmployee(data:any){
-    console.log(data)
 
     try {
         const response = await axios.post("http://localhost:3000/employee/create", data); 
-        console.log(response.data)
-
         return response.data;
        
     } catch (error) {
-        console.error("Error saving data:", error);
+        console.error("Erro ao salvar o funcionário:", error);
+    }
+}
+export async function getEmployeeById(employeeId:string){
+    try {
+        const response = await axios.get(`http://localhost:3000/employees/${employeeId}`);
+        return response.data;
+       
+    } catch (error) {
+        console.error("Ação de chhamar o funcionário está dando erro:", error);
+    }
+}
+export async function editEmployee(employeeId:string, data:any){
+
+    try {
+        
+        const response = await axios.put(`http://localhost:3000/employee/edit/${employeeId}`, data);
+        return response.data;
+       
+    } catch (error) {
+        console.error("Erro ao editar funcionário:", error);
+    }
+}
+export async function deleteEmployee(employeeId:string | undefined){
+
+    try {
+        const response = await axios.delete(`http://localhost:3000/employee/delete/${employeeId}`);
+        return response.data;
+       
+    } catch (error) {
+        console.error("Erro ao deletar funcionário:", error);
     }
 }

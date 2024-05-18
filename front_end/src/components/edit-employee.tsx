@@ -12,6 +12,7 @@ import {
 import { useForm } from "react-hook-form";
 import axios from "axios";
 import { SetAlert } from './alert';
+import { editEmployee, getEmployeeById } from "../router/router";
 
 type FormData = {
     name: string;
@@ -34,8 +35,7 @@ export function EditEmployee({ employeeId }: EditEmployeeProps) {
     useEffect(() => {
         const fetchEmployeeData = async () => {
             try {
-                const response = await axios.get(`http://localhost:3000/employees/${employeeId}`);
-                const employeeData: FormData = response.data;
+                const employeeData = await getEmployeeById(employeeId);
                 setValue("name", employeeData.name);
                 setValue("email", employeeData.email);
                 setValue("job_position", employeeData.job_position);
@@ -48,13 +48,13 @@ export function EditEmployee({ employeeId }: EditEmployeeProps) {
                 setLoading(false);
             }
         };
-
+       
         fetchEmployeeData();
     }, [employeeId, setValue]);
 
     const onSubmit = async (dataBody: FormData) => {
         try {
-            await axios.put(`http://localhost:3000/employee/edit/${employeeId}`, dataBody);
+            await editEmployee(employeeId, dataBody)
             setAlertStatus("success");
             setAlertMessage("Funcionário atualizado com sucesso");
         } catch (error) {

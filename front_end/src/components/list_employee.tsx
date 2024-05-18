@@ -1,10 +1,9 @@
 'use client'
-import { EditIcon, SmallCloseIcon} from '@chakra-ui/icons';
+import { EditIcon} from '@chakra-ui/icons';
 import {
     Box,
     Button,
     Flex,
-    Input,
     Table,
     Tbody,
     Td,
@@ -18,6 +17,7 @@ import { InputSearch } from './input_search';
 import { Paginate } from './paginate';
 import { fetchEmployees } from '../router/router';
 import { Link } from '@chakra-ui/next-js';
+import { DeleteEmployee } from './delete-employee';
 
 export interface Employee {
     _id?:string
@@ -71,6 +71,7 @@ export function ListEmployee() {
         setEmployees(sortedEmployees);
         setSortConfig({ key, direction });
     };
+ 
 
     return (
         <Box overflowX="auto">
@@ -108,18 +109,14 @@ export function ListEmployee() {
                                 <Td> 
                                     <Flex>
                                         <VStack spacing={4} align="flex-start">
-                                            <Link href={"/edit-employee/"+employee._id}>
+                                            <Link href={`/edit-employee/${employee._id}`}>
                                                 <Button colorScheme="yellow" marginLeft={["0", "2"]} marginTop={["2", "0"]} title='Editar'>
                                                 <EditIcon/>
                                                 </Button>
                                             </Link>
                                         </VStack>
                                         <VStack spacing={4} align="flex-start">
-                                            <Link href="/delete-employee">
-                                                <Button colorScheme="red" marginLeft={["0", "2"]} marginTop={["2", "0"]} title='Deletar'>
-                                                <SmallCloseIcon/>
-                                                </Button>
-                                            </Link>
+                                            <DeleteEmployee employeeId={employee._id} name={employee.name}/>
                                         </VStack>
                                     </Flex>
                                 </Td>

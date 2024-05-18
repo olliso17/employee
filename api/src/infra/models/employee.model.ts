@@ -6,13 +6,6 @@ import { randomUUID } from 'crypto';
 
 const EmployeeSchema = new Schema<Employee>(
     {
-        id: {
-            type: String,
-            default: randomUUID,
-            unique: true,
-            required: true,
-            index: true
-        },
         name: {
             type: String,
             required: true,
