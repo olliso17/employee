@@ -1,12 +1,11 @@
 
-import bodyParser from 'body-parser';
 import { Request, Response } from 'express';
-import { CreateEmployeeUsecase } from '../usecases/createEmployee.usecase.js';
-import { UpdateEmployeeUsecase } from '../usecases/updateEmployee.usecase.js';
-import { GetAllEmployeesUsecase } from '../usecases/getAllEmployee.usecase.js';
-import { GetEmployeeByIdUsecase } from '../usecases/getEmployeeById.usecase.js';
-import {EmployeRepository} from '../repositories/employee.repository.js';
-import { DeleteEmployeeUsecase } from '../usecases/deleteEmployee.usecase.js';
+import { CreateEmployeeUsecase } from '../../application/usecases/createEmployee.usecase';
+import { UpdateEmployeeUsecase } from '../../application/usecases/updateEmployee.usecase';
+import { GetAllEmployeesUsecase } from '../../application/usecases/getAllEmployee.usecase';
+import { GetEmployeeByIdUsecase } from '../../application/usecases/getEmployeeById.usecase';
+import { DeleteEmployeeUsecase } from '../../application/usecases/deleteEmployee.usecase';
+import { EmployeRepository } from '../repositories/employee.repository';
 
 export class EmployeeController {
     private createEmployeeUseCase: CreateEmployeeUsecase;

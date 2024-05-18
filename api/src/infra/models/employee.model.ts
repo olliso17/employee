@@ -1,10 +1,18 @@
 import mongoose, { Model, Schema, model } from 'mongoose';
-import { Employee } from '../entities/employee.js';
+import { Employee } from '../../domain/entities/employee';
+import { randomUUID } from 'crypto';
 
 
 
 const EmployeeSchema = new Schema<Employee>(
     {
+        id: {
+            type: String,
+            default: randomUUID,
+            unique: true,
+            required: true,
+            index: true
+        },
         name: {
             type: String,
             required: true,

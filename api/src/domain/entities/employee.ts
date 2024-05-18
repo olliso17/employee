@@ -1,6 +1,6 @@
-import EmployeeInterface from "./employee.interface.js";
-import { stringNotNullAndBlankSpace } from '../../utils/regex.js';
-import { AppError } from "../tratandoErro";
+import EmployeeInterface from "./employee.interface";
+import { stringNotNullAndBlankSpace } from '../../../utils/regex';
+import { AppError } from "../../tratandoErro";
 
 const uuid = require("uuid");
 

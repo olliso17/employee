@@ -1,11 +1,12 @@
-import { Employee } from "../entities/employee.js";
-import { EmployeeModel } from "../models/employee.model.js";
-import { AppError } from "../tratandoErro.js";
-import EmployeeRepositoryInterface from "./employee.repository.interface.js";
+import { Employee } from "../../domain/entities/employee";
+import { EmployeeModel } from "../models/employee.model";
+import { AppError } from "../../tratandoErro";
+import EmployeeRepositoryInterface from "./employee.repository.interface";
 
 
 export class EmployeRepository implements EmployeeRepositoryInterface {
-    async createEmployee(name: string,
+    async createEmployee(
+        name: string,
         email: string,
         job_position: string,
         departament: string,

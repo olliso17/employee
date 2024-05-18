@@ -1,4 +1,4 @@
-import { Employee } from "../entities/employee.js";
+import { Employee } from "../../domain/entities/employee";
 
 
 interface EmployeeRepositoryInterface {
