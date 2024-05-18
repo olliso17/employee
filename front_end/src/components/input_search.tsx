@@ -1,4 +1,4 @@
-import { Box, Flex, Input } from "@chakra-ui/react";
+import { Box, Flex, Input, VStack, Link, Button } from "@chakra-ui/react";
 import { Employee } from "./list_employee";
 import { useState } from "react";
 
@@ -35,10 +35,16 @@ export function InputSearch({ setEmployees, setCurrentPage, initialEmployees, ha
                     placeholder="Pesquisar"
                     value={searchTerm}
                     onChange={handleSearchChange}
-                    min-width="350px"
                     maxWidth={["100%", "70%", "50%"]}
                     marginBottom={["2", "0", "0"]}
                 />
+                <VStack spacing={4} align="flex-start">
+                    <Link href="/add-employee">
+                        <Button colorScheme="blue" marginLeft={["0", "2"]} marginTop={["2", "0"]}>
+                            Adicionar
+                        </Button>
+                    </Link>
+                </VStack>
             </Flex>
         </Box>
     )

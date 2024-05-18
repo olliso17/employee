@@ -20,6 +20,7 @@ import { fetchEmployees } from '../router/router';
 import { Link } from '@chakra-ui/next-js';
 
 export interface Employee {
+    _id?:string
     name: string;
     departament: string;
     email: string;
@@ -39,6 +40,8 @@ export function ListEmployee() {
         async function fetchData() {
             const data = await fetchEmployees();
             setEmployees(data);
+          
+
         }
         fetchData();
     }, []);
@@ -71,7 +74,7 @@ export function ListEmployee() {
 
     return (
         <Box overflowX="auto">
-            <Flex justifyContent="space-betwen">
+
                 <InputSearch
                     setCurrentPage={setCurrentPage}
                     setEmployees={setEmployees}
@@ -79,15 +82,6 @@ export function ListEmployee() {
                     handleSort={handleSort}
                 />
             
-                <VStack spacing={4} align="flex-start">
-                        <Link href="/add-employee">
-                            <Button colorScheme="blue" marginLeft={["0", "2"]} marginTop={["2", "0"]}>
-                                Adicionar
-                            </Button>
-                        </Link>
-                    </VStack>
-
-            </Flex>
             <Paginate employees={employees} setCurrentPage={setCurrentPage} currentPage={currentPage} itemsPerPage={itemsPerPage} />
            
 
@@ -114,7 +108,7 @@ export function ListEmployee() {
                                 <Td> 
                                     <Flex>
                                         <VStack spacing={4} align="flex-start">
-                                            <Link href="/edit-employee">
+                                            <Link href={"/edit-employee/"+employee._id}>
                                                 <Button colorScheme="yellow" marginLeft={["0", "2"]} marginTop={["2", "0"]} title='Editar'>
                                                 <EditIcon/>
                                                 </Button>

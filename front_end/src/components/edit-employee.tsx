@@ -1,5 +1,5 @@
 'use client'
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
     FormControl,
     FormLabel,
@@ -7,9 +7,10 @@ import {
     Button,
     VStack,
     Text,
+    Spinner,
 } from "@chakra-ui/react";
 import { useForm } from "react-hook-form";
-import { addEmployee } from "../router/router";
+import axios from "axios";
 import { SetAlert } from './alert';
 
 type FormData = {
@@ -20,27 +21,55 @@ type FormData = {
     actions: string;
 };
 
+type EditEmployeeProps = {
+    employeeId: string;
+};
 
-
-export function AddEmployee() {
-    const { register, handleSubmit, formState: { errors }, reset } = useForm<FormData>();
+export function EditEmployee({ employeeId }: EditEmployeeProps) {
+    const { register, handleSubmit, formState: { errors }, reset, setValue } = useForm<FormData>();
+    const [loading, setLoading] = useState(true);
     const [alertStatus, setAlertStatus] = useState<"success" | "error" | null>(null);
     const [alertMessage, setAlertMessage] = useState<string>("");
 
+    useEffect(() => {
+        const fetchEmployeeData = async () => {
+            try {
+                const response = await axios.get(`http://localhost:3000/employees/${employeeId}`);
+                const employeeData: FormData = response.data;
+                setValue("name", employeeData.name);
+                setValue("email", employeeData.email);
+                setValue("job_position", employeeData.job_position);
+                setValue("departament", employeeData.departament);
+                setValue("actions", employeeData.actions);
+                setLoading(false);
+            } catch (error) {
+                setAlertStatus("error");
+                setAlertMessage("Não foi possível buscar os dados do funcionário");
+                setLoading(false);
+            }
+        };
+
+        fetchEmployeeData();
+    }, [employeeId, setValue]);
+
     const onSubmit = async (dataBody: FormData) => {
         try {
-            const data = await addEmployee(dataBody) 
-            reset(); 
+            await axios.put(`http://localhost:3000/employee/edit/${employeeId}`, dataBody);
             setAlertStatus("success");
-            setAlertMessage("Funcionário salvo com Sucesso");
+            setAlertMessage("Funcionário atualizado com sucesso");
         } catch (error) {
             setAlertStatus("error");
-            setAlertMessage("Não foi possível adicionar funcionário");
+            setAlertMessage("Não foi possível atualizar o funcionário");
         }
     };
+
+    if (loading) {
+        return <Spinner />;
+    }
+
     return (
         <VStack spacing={4} align="center">
-            <SetAlert alertMessage={alertMessage} alertStatus = {alertStatus} setAlertStatus={setAlertStatus}/>
+            <SetAlert alertMessage={alertMessage} alertStatus={alertStatus} setAlertStatus={setAlertStatus} />
 
             <form onSubmit={handleSubmit(onSubmit)}>
                 <FormControl isInvalid={!!errors.name}>
