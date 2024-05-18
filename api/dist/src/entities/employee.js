@@ -1,3 +1,4 @@
+import { stringNotNullAndBlankSpace } from '../../utils/regex.js';
 const uuid = require("uuid");
 export class Employee {
     constructor(props) {
@@ -7,9 +8,10 @@ export class Employee {
         this._job_position = props.job_position;
         this._departament = props.departament;
         this._actions = props.actions;
-        this._created_at = props.created_at;
-        this._updated_at = props.updated_at;
-        this._active = props.active;
+        this._created_at = new Date;
+        this._updated_at = new Date;
+        this._active = true;
+        this.validateEmployee();
     }
     get job_position() {
         return this._job_position;
@@ -38,4 +40,22 @@ export class Employee {
     get active() {
         return this._active;
     }
+    validateEmployee() {
+        if (stringNotNullAndBlankSpace.test(this.name) === false) {
+            throw new Error("Name is not a valid employee");
+        }
+        if (stringNotNullAndBlankSpace.test(this.email) === false) {
+            throw new Error("Email is not a valid employee");
+        }
+        if (stringNotNullAndBlankSpace.test(this.departament) === false) {
+            throw new Error("Departament is not a valid employee");
+        }
+        if (stringNotNullAndBlankSpace.test(this.job_position) === false) {
+            throw new Error("Job Position is not a valid employee");
+        }
+        if (stringNotNullAndBlankSpace.test(this.actions) === false) {
+            throw new Error("Actions is not a valid employee");
+        }
+    }
+    ;
 }

@@ -8,4 +8,5 @@ export default interface EmployeeInterface {
     get created_at(): Date
     get updated_at(): Date
     get active(): boolean
+    validateEmployee():void
 }

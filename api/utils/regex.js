@@ -1,0 +1,14 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.atLeastOneNumber = exports.atLeastOneSpecialCharacter = exports.atLeastOneUppercaseLetter = exports.stringSpecialCaracters = exports.extensionImageExist = exports.isFile = exports.isUrl = exports.isValidPassword = exports.isCpf = exports.isEmail = exports.stringNotNullAndBlankSpace = void 0;
+exports.stringNotNullAndBlankSpace = /^(?!\s*$).+/;
+exports.isEmail = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
+exports.isCpf = /^[0-9]{11}$/;
+exports.isValidPassword = /^(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*])(?=.*[a-z]).{8,}$/;
+exports.isUrl = /^(?=.{1,2083}$)(?:(?:https?|ftp):\/\/)?((?:xn--)?[a-zA-Z0-9]+(?:-[a-zA-Z0-9]+)*\.){1,}(?:[a-zA-Z]{2,})(?:\/[^\/\r\n]*)*$/i;
+exports.isFile = /(?:\.([^.]+))?$/;
+exports.extensionImageExist = /^image\/(jpeg|png|jpg|bmp)$/;
+exports.stringSpecialCaracters = /^(?![!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?`~])[\w!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?`~]+$/;
+exports.atLeastOneUppercaseLetter = /^(?=.*[A-Z]).+$/;
+exports.atLeastOneSpecialCharacter = /^(?=.*[!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?`~])/;
+exports.atLeastOneNumber = /.*[0-9].*/;
